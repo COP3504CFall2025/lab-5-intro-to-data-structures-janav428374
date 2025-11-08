@@ -112,7 +112,7 @@ public:
 		tail = nullptr;
 		count = 0;
 	}
-	LinkedList(LinkedList<T>& list) {
+	LinkedList(const LinkedList<T>& list) {
 		addNode(list.getHead());
 		count = list.count;
 	}
@@ -153,7 +153,7 @@ private:
 		addHead(other_head->data);
 	}
 
-	void printNodeB(Node<T>* head) {
+	void printNodeB(Node<T>* head) const{
 		if (head->next == nullptr) {
 			std::cout << head->data << std::endl;
 			return;
@@ -162,7 +162,7 @@ private:
 		std::cout << head->data << std::endl;
 	}
 
-	void printNodeF(Node<T>* tail) {
+	void printNodeF(Node<T>* tail) const{
 		if (tail->prev == nullptr) {
 			std::cout << tail->data << std::endl;
 			return;
