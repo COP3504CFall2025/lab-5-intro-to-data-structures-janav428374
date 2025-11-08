@@ -22,14 +22,14 @@ public:
 
 	// Accessors
 	[[nodiscard]] unsigned int getCount() const {return count;}
-	Node* getHead() {return head;}
-	const Node* getHead() const {return head;}
-	Node* getTail() {return tail;}
-	const Node* getTail() const {return tail;}
+	Node<T>* getHead() {return head;}
+	const Node<T>* getHead() const {return head;}
+	Node<T>* getTail() {return tail;}
+	const Node<T>* getTail() const {return tail;}
 
 	// Insertion
 	void addHead(const T& data) {
-		Node* temp = new Node;
+		Node<T>* temp = new Node<T>;
 		temp->data = data;
 		temp->next = head;
 		if (head != nullptr) {
@@ -43,7 +43,7 @@ public:
 	}
 
 	void addTail(const T& data) {
-		Node* temp = new Node;
+		Node<T>* temp = new Node<T>;
 		temp->data = data;
 		temp->prev = tail;
 		if (tail != nullptr) {
@@ -58,24 +58,26 @@ public:
 
 	// Removal
 	bool removeHead() {
-		if (count == 0) {return;}
-		Node* prev_head = head;
+		if (count == 0) {return false;}
+		Node<T>* prev_head = head;
 		head = head->next;
 		delete prev_head;
 		if (count == 1) {
 			tail = nullptr;
 		}
 		count--;
+		return true;
 	}
 	bool removeTail() {
-		if (count == 0) {return;}
-		Node* prev_tail = tail;
+		if (count == 0) {return false;}
+		Node<T>* prev_tail = tail;
 		tail = tail->prev;
 		delete prev_tail;
 		if (count == 1) {
 			head = nullptr;
 		}
 		count--;
+		return true;
 	}
 	void Clear() {
 		if (head != nullptr) {
@@ -127,11 +129,11 @@ public:
 
 private:
 	// Stores pointers to first and last nodes and count
-	Node* head;
-	Node* tail;
+	Node<T>* head;
+	Node<T>* tail;
 	unsigned int count;
 
-	void removeNode(Node* address) {
+	void removeNode(Node<T>* address) {
 		if (address->next == nullptr) {
 			delete address;
 			return;
@@ -140,8 +142,8 @@ private:
 		delete address;
 	}
 
-	void addNode(Node* other_head) {
-		if (address->next == nullptr) {
+	void addNode(Node<T>* other_head) {
+		if (other_head->next == nullptr) {
 			addHead(other_head->data);
 			return;
 		}
@@ -149,7 +151,7 @@ private:
 		addHead(addHead(other_head->data));
 	}
 
-	void printNodeB(Node* head) {
+	void printNodeB(Node<T>* head) {
 		if (head->next == nullptr) {
 			std::cout << head->data << std::endl;
 			return;
@@ -158,7 +160,7 @@ private:
 		std::cout << head->data << std::endl;
 	}
 
-	void printNodeF(Node* tail) {
+	void printNodeF(Node<T>* tail) {
 		if (tail->prev == nullptr) {
 			std::cout << tail->data << std::endl;
 			return;
