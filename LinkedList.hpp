@@ -137,6 +137,7 @@ private:
 	unsigned int count;
 
 	void removeNode(Node<T>* address) {
+		if (address == nullptr) {return;}
 		if (address->next == nullptr) {
 			delete address;
 			return;
