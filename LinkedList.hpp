@@ -83,10 +83,10 @@ public:
 	void clear() {
 		if (head != nullptr) {
 			removeNode(head);
-			head = nullptr;
-			tail = nullptr;
 		}
 		count = 0;
+		head = nullptr;
+		tail = nullptr;
 	}
 
 	// Operators
@@ -136,7 +136,7 @@ private:
 	Node<T>* tail = nullptr;
 	unsigned int count = 0;
 
-	void removeNode(Node<T>* address) {
+	void removeNode(Node<T>* address = nullptr) {
 		if (address == nullptr) {return;}
 		if (address->next == nullptr) {
 			delete address;
@@ -147,6 +147,7 @@ private:
 	}
 
 	void addNode(const Node<T>* other_head) {
+		if (other_head == nullptr) {return;}
 		if (other_head->next == nullptr) {
 			addHead(other_head->data);
 			return;
