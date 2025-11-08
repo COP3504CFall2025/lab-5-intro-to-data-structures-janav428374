@@ -135,7 +135,7 @@ private:
 	Node<T>* tail;
 	unsigned int count;
 
-	void removeNode(Node<T>* address) {
+	void removeNode(const Node<T>* address) {
 		if (address->next == nullptr) {
 			delete address;
 			return;
@@ -144,7 +144,7 @@ private:
 		delete address;
 	}
 
-	void addNode(Node<T>* other_head) {
+	void addNode(const Node<T>* other_head) {
 		if (other_head->next == nullptr) {
 			addHead(other_head->data);
 			return;
