@@ -79,7 +79,7 @@ public:
 		count--;
 		return true;
 	}
-	void Clear() {
+	void clear() {
 		if (head != nullptr) {
 			removeNode(head);
 			head = nullptr;
@@ -99,7 +99,7 @@ public:
 		other.count = 0;
 	}
 	LinkedList<T>& operator=(const LinkedList<T>& rhs) {
-		Clear();
+		clear();
 		addNode(rhs.getHead());
 		count = rhs.count;
 	}
@@ -124,7 +124,7 @@ public:
 		other.count = 0;
 	}
 	~LinkedList() {
-		Clear();
+		clear();
 	}
 
 private:
