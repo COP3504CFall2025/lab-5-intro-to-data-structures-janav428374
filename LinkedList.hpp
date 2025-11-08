@@ -132,9 +132,9 @@ public:
 
 private:
 	// Stores pointers to first and last nodes and count
-	Node<T>* head;
-	Node<T>* tail;
-	unsigned int count;
+	Node<T>* head = nullptr;
+	Node<T>* tail = nullptr;
+	unsigned int count = 0;
 
 	void removeNode(Node<T>* address) {
 		if (address == nullptr) {return;}
