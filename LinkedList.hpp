@@ -97,11 +97,13 @@ public:
 		other.head = nullptr;
 		other.tail = nullptr;
 		other.count = 0;
+		return *this;
 	}
 	LinkedList<T>& operator=(const LinkedList<T>& rhs) {
 		clear();
 		addNode(rhs.getHead());
 		count = rhs.count;
+		return *this;
 	}
 
 	// Construction/Destruction
@@ -110,7 +112,7 @@ public:
 		tail = nullptr;
 		count = 0;
 	}
-	LinkedList(const LinkedList<T>& list) {
+	LinkedList(LinkedList<T>& list) {
 		addNode(list.getHead());
 		count = list.count;
 	}
@@ -148,7 +150,7 @@ private:
 			return;
 		}
 		addNode(other_head->next);
-		addHead(addHead(other_head->data));
+		addHead(other_head->data);
 	}
 
 	void printNodeB(Node<T>* head) {
