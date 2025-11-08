@@ -73,6 +73,7 @@ public:
 		Node<T>* prev_tail = tail;
 		tail = tail->prev;
 		delete prev_tail;
+		tail->next = nullptr;
 		if (count == 1) {
 			head = nullptr;
 		}
