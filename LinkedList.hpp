@@ -136,7 +136,7 @@ private:
 	Node<T>* tail = nullptr;
 	unsigned int count = 0;
 
-	void removeNode(Node<T>* address = nullptr) {
+	void removeNode(Node<T>* address) {
 		if (address == nullptr) {return;}
 		if (address->next == nullptr) {
 			delete address;
