@@ -27,11 +27,13 @@ public:
     //Copy Operator
     LLS<T>& operator=(const LLS<T>& other) {
         list = other.getList();
+        return *this;
     }
 
     //Move Operator
     LLS<T>& operator=(LLS<T>&& other) noexcept {
         list = std::move(other.getList());
+        return *this;
     }
 
     LinkedList<T> getList() const{
