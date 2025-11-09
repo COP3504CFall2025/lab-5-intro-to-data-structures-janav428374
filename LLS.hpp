@@ -21,7 +21,7 @@ public:
 
     //Move Constructor
     LLS(const LLS<T>&& other) noexcept{
-        list = std::move(other.getLinkedList());
+        list = (other.getLinkedList());
     }
 
     //Copy Assignment
@@ -32,7 +32,7 @@ public:
 
     //Move Assignment
     LLS& operator=(const LLS<T>&& rhs) noexcept{
-        list = std::move(rhs.getLinkedList());
+        list = (rhs.getLinkedList());
         return *this;
     }
 
@@ -46,6 +46,7 @@ public:
 
     // Deletion
     T pop() override {
+        if (list.getCount() == 0) {return void;}
         T head_value = (list.getHead())->data;
         list.removeHead();
         return head_value;
@@ -53,6 +54,7 @@ public:
 
     // Access
     T peek() const override {
+        if (list.getCount() == 0) {return void;}
         T head_value = (list.getHead())->data;
         return head_value;
     }
