@@ -36,7 +36,7 @@ public:
         return *this;
     }
 
-    LinkedList<T>& getLinkedList() const {
+    LinkedList<T>& getLinkedList() {
         return list;
     }
     // Insertion
@@ -46,14 +46,14 @@ public:
 
     // Deletion
     T pop() override {
-        T head_value = *(list.getHead());
+        T head_value = (list.getHead())->data;
         list.removeHead();
         return head_value;
     }
 
     // Access
     T peek() const override {
-        T head_value = *(list.getHead());
+        T head_value = (list.getHead())->data;
         return head_value;
     }
 
