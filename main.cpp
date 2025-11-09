@@ -19,12 +19,11 @@
 */
 
 int main() {
-    LinkedList<int> list;
-    list.addHead(53);
-    list.addTail(85);
-    list.addHead(80);
-    list.printReverse();
-    list.clear();
+    LLS<int> stack;
+    stack.push(5);
+    stack.pop();
+    stack.peek();
+    stack.PrintForward();
     return 0;
 }
 

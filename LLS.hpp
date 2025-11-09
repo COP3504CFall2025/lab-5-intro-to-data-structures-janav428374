@@ -21,7 +21,7 @@ public:
 
     //Move Constructor
     LLS(const LLS<T>&& other) noexcept{
-        list = (other.getLinkedList());
+        list = other.getLinkedList();
     }
 
     //Copy Assignment
@@ -36,7 +36,7 @@ public:
         return *this;
     }
 
-    LinkedList<T>& getLinkedList() {
+    LinkedList<T> getLinkedList() {
         return list;
     }
     // Insertion
