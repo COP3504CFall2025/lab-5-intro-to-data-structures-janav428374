@@ -14,9 +14,11 @@ class LinkedList {
 public:
 	// Behaviors
 	void printForward() const {
+		if (count == 0) {return;}
 		printNodeF(tail);
 	}
 	void printReverse() const {
+		if (count == 0) {return;}
 		printNodeB(head);
 	}
 
@@ -29,9 +31,7 @@ public:
 
 	// Insertion
 	void addHead(const T& data) {
-		Node<T>* temp = new Node<T>;
-		temp->data = data;
-		temp->next = head;
+		Node<T>* temp = new Node<T>(data, nullptr, head);
 		if (head != nullptr) {
 			head->prev = temp;
 		}
@@ -43,9 +43,7 @@ public:
 	}
 
 	void addTail(const T& data) {
-		Node<T>* temp = new Node<T>;
-		temp->data = data;
-		temp->prev = tail;
+		Node<T>* temp = new Node<T>(data, tail, nullptr);
 		if (tail != nullptr) {
 			tail->next = temp;
 		}

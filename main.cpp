@@ -1,4 +1,4 @@
-#ifdef MAIN
+#ifndef MAIN
 
 #include "ABDQ.hpp"
 #include "ABQ.hpp"
@@ -19,8 +19,12 @@
 */
 
 int main() {
-
-
+    LinkedList<int> list;
+    list.addHead(53);
+    list.addTail(85);
+    list.addHead(80);
+    list.printReverse();
+    list.clear();
     return 0;
 }
 
