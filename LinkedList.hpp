@@ -97,6 +97,7 @@ public:
 
 	// Operators
 	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept {
+		clear();
 		head = other.head;
 		tail = other.tail;
 		count = other.count;

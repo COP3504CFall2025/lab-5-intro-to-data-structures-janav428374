@@ -26,14 +26,12 @@ public:
 
     //Copy Operator
     LLS<T>& operator=(const LLS<T>& other) {
-        list.clear();
         list = other.getList();
         return *this;
     }
 
     //Move Operator
     LLS<T>& operator=(LLS<T>&& other) noexcept {
-        list.clear();
         list = std::move(other.getList());
         return *this;
     }
