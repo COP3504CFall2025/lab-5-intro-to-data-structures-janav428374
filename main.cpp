@@ -1,4 +1,4 @@
-#ifdef MAIN
+#ifndef MAIN
 
 #include "ABDQ.hpp"
 #include "ABQ.hpp"
@@ -9,6 +9,7 @@
 #include "LLQ.hpp"
 #include "LLS.hpp"
 #include <iostream>
+#include <utility>
 
 /*
     - LEAVE THE IFDEF GUARDS TO KEEP YOUR MAIN WITHOUT CONFLICTING WITH GRADESCOPE!
@@ -21,8 +22,11 @@
 int main() {
     LLS<int> stack;
     stack.push(5);
-    stack.pop();
-    stack.peek();
+    stack.push(5);
+    stack.push(5);
+    LLS<int> stack2 = std::move(stack);
+    stack2.PrintForward();
+    std::cout << "Original Stack" << std::endl;
     stack.PrintForward();
     return 0;
 }

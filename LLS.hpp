@@ -16,29 +16,32 @@ public:
 
     //Copy Constructor
     LLS(const LLS<T>& other) {
-        list = other.getLinkedList();
+        list = other.getList();
     }
 
     //Move Constructor
-    LLS(const LLS<T>&& other) noexcept{
-        list = other.getLinkedList();
+    LLS(LLS<T>&& other) noexcept {
+        list = std::move(other.getList());
     }
 
-    //Copy Assignment
-    LLS& operator=(const LLS<T>& rhs) {
-        list = rhs.getLinkedList();
-        return *this;
+    //Copy Operator
+    LLS<T>& operator=(const LLS<T>& other) {
+        list = other.getList();
     }
 
-    //Move Assignment
-    LLS& operator=(const LLS<T>&& rhs) noexcept{
-        list = (rhs.getLinkedList());
-        return *this;
+    //Move Operator
+    LLS<T>& operator=(LLS<T>&& other) noexcept {
+        list = std::move(other.getList());
     }
 
-    LinkedList<T>& getLinkedList() {
+    LinkedList<T> getList() const{
         return list;
     }
+
+    LinkedList<T>& getList() {
+        return list;
+    }
+
     // Insertion
     void push(const T& item) override {
         list.addHead(item);
