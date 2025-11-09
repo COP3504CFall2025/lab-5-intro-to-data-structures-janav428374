@@ -59,24 +59,32 @@ public:
 	// Removal
 	bool removeHead() {
 		if (count == 0) {return false;}
+		if (count == 1) {
+			delete head;
+			head = nullptr;
+			tail = nullptr;
+			count = 0;
+			return;
+		}
 		Node<T>* prev_head = head;
 		head = head->next;
 		delete prev_head;
-		if (count == 1) {
-			tail = nullptr;
-		}
 		count--;
 		return true;
 	}
 	bool removeTail() {
 		if (count == 0) {return false;}
+		if (count == 1) {
+			delete head;
+			head = nullptr;
+			tail = nullptr;
+			count = 0;
+			return;
+		}
 		Node<T>* prev_tail = tail;
 		tail = tail->prev;
 		delete prev_tail;
 		tail->next = nullptr;
-		if (count == 1) {
-			head = nullptr;
-		}
 		count--;
 		return true;
 	}
