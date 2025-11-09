@@ -15,28 +15,28 @@ public:
     LLS() {}
 
     //Copy Constructor
-    LLS(LLS<T>& other) {
+    LLS(const LLS<T>& other) {
         list = other.getLinkedList();
     }
 
     //Move Constructor
-    LLS(LLS<T>&& other) noexcept{
+    LLS(const LLS<T>&& other) noexcept{
         list = other.getLinkedList();
     }
 
     //Copy Assignment
-    LLS& operator=(LLS<T>& rhs) {
+    LLS& operator=(const LLS<T>& rhs) {
         list = rhs.getLinkedList();
         return *this;
     }
 
     //Move Assignment
-    LLS& operator=(LLS<T>&& rhs) noexcept{
+    LLS& operator=(const LLS<T>&& rhs) noexcept{
         list = (rhs.getLinkedList());
         return *this;
     }
 
-    LinkedList<T> getLinkedList() {
+    LinkedList<T>& getLinkedList() const{
         return list;
     }
     // Insertion
