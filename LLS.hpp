@@ -36,7 +36,7 @@ public:
         return *this;
     }
 
-    LinkedList<T>& getLinkedList() const{
+    LinkedList<T>& getLinkedList() {
         return list;
     }
     // Insertion
