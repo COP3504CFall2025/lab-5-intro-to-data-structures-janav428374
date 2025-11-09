@@ -50,7 +50,7 @@ public:
     // Core Removal Operations
     T popFront() override {
         if (list.getCount() == 0) {
-            throw std::runtime_error("Stack Double Queue");
+            throw std::runtime_error("Empty Double Queue");
         }
         T head_value = (list.getHead())->data;
         list.removeHead();
@@ -59,7 +59,7 @@ public:
 
     T popBack() override {
         if (list.getCount() == 0) {
-            throw std::runtime_error("Stack Double Queue");
+            throw std::runtime_error("Empty Double Queue");
         }
         T tail_value = (list.getTail())->data;
         list.removeTail();
@@ -71,15 +71,13 @@ public:
         if (list.getCount() == 0) {
             throw std::runtime_error("Stack Double Queue");
         }
-        T head_value = (list.getHead())->data;
-        return head_value;
+        return (list.getHead())->data;
     }
     const T& back() const override {
         if (list.getCount() == 0) {
             throw std::runtime_error("Stack Double Queue");
         }
-        T tail_value = (list.getTail())->data;
-        return tail_value;
+        return (list.getTail())->data;
     }
 
     // Getter
