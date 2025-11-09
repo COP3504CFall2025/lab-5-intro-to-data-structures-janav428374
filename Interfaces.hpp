@@ -15,10 +15,10 @@ class StackInterface {
 
 template <typename T>
 class QueueInterface {
-    void enqueue(const T& item) = 0;
-    T dequeue() = 0;
-    T peek() const = 0;
-    std::size_t getSize() const noexcept = 0;
+    void virtual enqueue(const T& item) = 0;
+    T virtual dequeue() = 0;
+    T virtual peek() const = 0;
+    std::size_t virtual getSize() const noexcept = 0;
 };
 
 
