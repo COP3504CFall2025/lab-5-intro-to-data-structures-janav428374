@@ -36,6 +36,11 @@ public:
         return *this;
     }
 
+    //Destructor
+    ~LLS() {
+        list.clear();
+    }
+
     LinkedList<T> getList() const{
         return list;
     }
