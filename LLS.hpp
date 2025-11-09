@@ -26,7 +26,7 @@ public:
 
     //Copy Operator
     LLS<T>& operator=(const LLS<T>& other) {
-        list.clear()
+        list.clear();
         list = other.getList();
         return *this;
     }
