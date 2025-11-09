@@ -64,7 +64,7 @@ public:
 			head = nullptr;
 			tail = nullptr;
 			count = 0;
-			return;
+			return true;
 		}
 		Node<T>* prev_head = head;
 		head = head->next;
@@ -79,7 +79,7 @@ public:
 			head = nullptr;
 			tail = nullptr;
 			count = 0;
-			return;
+			return true;
 		}
 		Node<T>* prev_tail = tail;
 		tail = tail->prev;
