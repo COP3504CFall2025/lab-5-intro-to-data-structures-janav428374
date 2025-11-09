@@ -46,7 +46,9 @@ public:
 
     // Deletion
     T pop() override {
-        if (list.getCount() == 0) {return void;}
+        if (list.getCount() == 0) {
+            throw std::runtime_error("Stack Empty");
+        }
         T head_value = (list.getHead())->data;
         list.removeHead();
         return head_value;
@@ -54,7 +56,9 @@ public:
 
     // Access
     T peek() const override {
-        if (list.getCount() == 0) {return void;}
+        if (list.getCount() == 0) {
+            throw std::runtime_error("Stack Empty");
+        }
         T head_value = (list.getHead())->data;
         return head_value;
     }
