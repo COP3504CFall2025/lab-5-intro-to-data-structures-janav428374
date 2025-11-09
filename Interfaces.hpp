@@ -6,10 +6,10 @@
 
 template <typename T>
 class StackInterface {
-    void push(const T& item) = 0;
-    T pop() = 0;
-    T peek() const = 0;
-    std::size_t getSize() const noexcept = 0;
+    void virtual push(const T& item) = 0;
+    T virtual pop() = 0;
+    T virtual peek() const = 0;
+    std::size_t virtual getSize() const noexcept = 0;
 };
 
 
