@@ -15,22 +15,95 @@ private:
 
 public:
     // Constructor
-    LLDQ();
+    LLDQ() {}
+
+        //Copy Constructor
+    LLDQ(const LLDQ<T>& other) {
+        list = other.getList();
+    }
+
+    //Move Constructor
+    LLDQ(LLDQ<T>&& other) noexcept {
+        list = std::move(other.getList());
+    }
+
+    //Copy Operator
+    LLDQ<T>& operator=(const LLDQ<T>& other) {
+        list = other.getList();
+        return *this;
+    }
+
+    //Move Operator
+    LLDQ<T>& operator=(LLDQ<T>&& other) noexcept {
+        list = std::move(other.getList());
+        return *this;
+    }
 
     // Core Insertion Operations
-    void pushFront(const T& item) override;
-    void pushBack(const T& item) override;
+    void pushFront(const T& item) override {
+        list.addHead(item);
+    }
+    void pushBack(const T& item) override {
+        list.addTail(item);
+    }
 
     // Core Removal Operations
-    T popFront() override;
-    T popBack() override;
+    T popFront() override {
+        if (list.getCount() == 0) {
+            throw std::runtime_error("Stack Double Queue");
+        }
+        T head_value = (list.getHead())->data;
+        list.removeHead();
+        return head_value;
+    }
+
+    T popBack() override {
+        if (list.getCount() == 0) {
+            throw std::runtime_error("Stack Double Queue");
+        }
+        T tail_value = (list.getTail())->data;
+        list.removeTail();
+        return tail_value;
+    }
 
     // Element Accessors
-    const T& front() const override;
-    const T& back() const override;
+    const T& front() const override {
+        if (list.getCount() == 0) {
+            throw std::runtime_error("Stack Double Queue");
+        }
+        T head_value = (list.getHead())->data;
+        return head_value;
+    }
+    const T& back() const override {
+        if (list.getCount() == 0) {
+            throw std::runtime_error("Stack Double Queue");
+        }
+        T tail_value = (list.getTail())->data;
+        return tail_value;
+    }
 
     // Getter
-    std::size_t getSize() const noexcept override;
+    std::size_t getSize() const noexcept override {
+        return list.getCount();
+    }
+
+    void PrintForward() {
+        list.printForward();
+    }
+
+    void PrintReverse() {
+        list.printNodeF();
+    }
+
+private:
+    LinkedList<T> getList() const{
+        return list;
+    }
+
+    LinkedList<T>& getList() {
+        return list;
+    }
+
 };
 
 

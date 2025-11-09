@@ -81,4 +81,5 @@ private:
     LinkedList<T>& getList() {
         return list;
     }
+
 };
