@@ -36,19 +36,6 @@ public:
         return *this;
     }
 
-    //Destructor
-    ~LLS() {
-        list.clear();
-    }
-
-    LinkedList<T> getList() const{
-        return list;
-    }
-
-    LinkedList<T>& getList() {
-        return list;
-    }
-
     // Insertion
     void push(const T& item) override {
         list.addHead(item);
@@ -84,5 +71,14 @@ public:
 
     void PrintReverse() {
         list.printNodeF();
+    }
+
+private:
+    LinkedList<T> getList() const{
+        return list;
+    }
+
+    LinkedList<T>& getList() {
+        return list;
     }
 };
