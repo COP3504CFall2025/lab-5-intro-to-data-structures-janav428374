@@ -21,5 +21,7 @@
 
 int main() {
     ABDQ<int> queue;
+    //queue.pushFront(0);
+    std:: cout << queue.popFront() << std::endl;
 }
 #endif

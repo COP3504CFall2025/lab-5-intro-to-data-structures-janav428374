@@ -136,7 +136,7 @@ public:
     }
 
     // Deletion
-    T popFront() override {
+    T popBack() override {
         if (size_ == 0) {
             throw std::runtime_error("Empty Queue");
         }
@@ -145,7 +145,7 @@ public:
         ShrinkIfNeeded();
         return returnValue;
     }
-    T popBack() override {
+    T popFront() override {
         if (size_ == 0) {
             throw std::runtime_error("Empty Queue");
         }
