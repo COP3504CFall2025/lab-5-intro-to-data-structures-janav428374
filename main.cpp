@@ -20,23 +20,6 @@
 */
 
 int main() {
-    ABQ<int> queue(10);
-
-    queue.enqueue(10);
-    queue.enqueue(11);
-    queue.enqueue(12);
-    queue.enqueue(13);
-    queue.dequeue();
-    queue.enqueue(111);
-    queue.enqueue(112);
-    queue.dequeue();
-    queue.enqueue(1333);
-    queue.dequeue();
-    queue.enqueue(1334);
-    queue.printE();
-    
-    ABQ<int> queue2(std::move(queue));
-    queue.printE();
-    queue2.printE();
+    ABDQ<int> queue;
 }
 #endif
