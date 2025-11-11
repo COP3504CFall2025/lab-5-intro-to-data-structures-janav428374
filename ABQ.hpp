@@ -64,27 +64,14 @@ public:
         array_ = temp_array;
         return *this;
     }
-    ABQ(ABQ&& other) noexcept {
-        //resetData(true);
-        capacity_ = other.getMaxCapacity();
-        curr_size_ = other.getSize();
-        first_index = other.getFirstIndex();
-        last_index = other.getLastIndex();
-        array_ = other.getData();
+    
+    // ABQ(ABQ&& other) noexcept {
+        
+    // }
+    // ABQ& operator=(ABQ&& other) noexcept {
+        
+    // }
 
-        other.resetData(false);
-    }
-    ABQ& operator=(ABQ&& other) noexcept {
-        resetData(true);
-        capacity_ = other.getMaxCapacity();
-        curr_size_ = other.getSize();
-        first_index = other.getFirstIndex();
-        last_index = other.getLastIndex();
-        array_ = other.getData();
-
-        other.resetData(false);
-        return *this;
-    }
     ~ABQ() noexcept {
         resetData(true);
     }
