@@ -54,12 +54,14 @@ public:
         first_index = other.getFirstIndex();
         last_index = other.getLastIndex();
         T* temp_array = new T[capacity_];
-        delete[] array_;
-        array_ = temp_array;
+
         T* other_data = other.getData();
         for (int i = 0; i < curr_size_; i++) {
             array_[i] = other_data[i];
         }
+
+        delete[] array_;
+        array_ = temp_array;
         return *this;
     }
     ABQ(ABQ&& other) noexcept {
@@ -126,6 +128,7 @@ public:
                 temp_data[i - first_index] = array_[i % curr_size_];
             }
 
+            delete[] array_;
             array_ = temp_data;
 
             first_index = 0;
@@ -165,6 +168,7 @@ public:
                 temp_data[i - first_index] = array_[i % (curr_size_ + first_index)];
             }
 
+            delete[] array_;
             array_ = temp_data;
             first_index = 0;
             last_index = curr_size_ - 1;

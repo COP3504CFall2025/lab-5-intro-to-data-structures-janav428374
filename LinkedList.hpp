@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 using namespace std;
-mess
+
 template <typename T>
 struct Node {
     T data;
