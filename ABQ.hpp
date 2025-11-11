@@ -57,7 +57,7 @@ public:
 
         T* other_data = other.getData();
         for (int i = 0; i < curr_size_; i++) {
-            array_[i] = other_data[i];
+            temp_array[i] = other_data[i];
         }
 
         delete[] array_;
@@ -70,8 +70,8 @@ public:
         array_ = other.getData();
         first_index = other.getFirstIndex();
         last_index = other.getLastIndex();
-        other.array_ = nullptr;
-        //other.resetData(false);
+        //other.array_ = nullptr;
+        other.resetData(false);
     }
     ABQ& operator=(ABQ&& other) noexcept {
         resetData(true);
@@ -80,8 +80,8 @@ public:
         array_ = other.getData();
         first_index = other.getFirstIndex();
         last_index = other.getLastIndex();
-        other.array_ = nullptr;
-        //other.resetData(false);
+        //other.array_ = nullptr;
+        other.resetData(false);
         return *this;
     }
     ~ABQ() noexcept {
