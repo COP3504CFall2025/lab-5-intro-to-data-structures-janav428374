@@ -30,7 +30,7 @@ public:
 
         T* other_array = other.getData();
         for (int i = 0; i < curr_size_; i++) {
-            other_array[i] = array_[i];
+            array_[i] = other_array[i];
         }
     }
 
@@ -41,7 +41,7 @@ public:
         delete[] array_;
         array_ = temp_array;
         T* other_data = other.getData();
-        for (int i = 0; i < capacity_; i++) {
+        for (int i = 0; i < curr_size_; i++) {
             array_[i] = other_data[i];
         }
         return *this;
@@ -111,8 +111,8 @@ public:
         if (curr_size_ == 0) {
             throw std::runtime_error("Stack Empty");
         }
-        T element = array_[curr_size_ - 1];
         curr_size_ --;
+        T element = array_[curr_size_];
         return element;
     }
 
