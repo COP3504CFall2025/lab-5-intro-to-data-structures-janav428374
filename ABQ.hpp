@@ -94,7 +94,7 @@ public:
             capacity_ *= scale_factor_;
             T* temp_data = new T[capacity_];
 
-            for (int i = 0; i < curr_size_; i++) {
+            for (unsigned int i = 0; i < curr_size_; i++) {
                 temp_data[i] = array_[i];
             }
             delete[] array_;
@@ -129,13 +129,13 @@ public:
             capacity_ /= scale_factor_;
             T* temp_data = new T[capacity_];
 
-            for (int i = 0; i < curr_size_; i++) {
+            for (unsigned int i = 0; i < curr_size_; i++) {
                 temp_data[i] = array_[i + 1];
             }
             delete[] array_;
             array_ = temp_data;
         } else {
-            for (int i = 0; i < curr_size_; i++) {
+            for (unsigned int i = 0; i < curr_size_; i++) {
                 array_[i] = array_[i + 1];
             }
         }
