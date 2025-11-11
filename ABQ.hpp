@@ -105,6 +105,7 @@ public:
             array_[i] = array_[i - 1];
         }
         array_[0] = data;
+        curr_size_++;
     }
 
     // Access
