@@ -112,12 +112,12 @@ public:
                 array_[last_index + 1] = data;
                 last_index++;
             }
-            //curr_size_++;
+            curr_size_++;
             return;
         } else if (first_index != 0 && curr_size_ < capacity_) {
             last_index = (last_index + 1) % capacity_;
             array_[last_index] = data; //wraps back up if the indices overflow
-            //curr_size_ ++;
+            curr_size_ ++;
             return;
         } else if (curr_size_ >= capacity_) {
             capacity_ *= scale_factor_;
@@ -135,10 +135,10 @@ public:
             last_index = curr_size_ - 1;
             array_[last_index + 1] = data;
             last_index++;
-            //curr_size_++;
+            curr_size_++;
         }
 
-        curr_size_++;
+        //curr_size_++;
     }
 
     // Access

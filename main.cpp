@@ -1,4 +1,4 @@
-#ifdef MAIN
+#ifndef MAIN
 
 #include "ABDQ.hpp"
 #include "ABQ.hpp"
@@ -21,49 +21,17 @@
 
 int main() {
     ABQ<int> queue(10);
-    queue.unused_indices(-1);
-    queue.printArray();
 
     queue.enqueue(10);
-    queue.unused_indices(-1);
-    queue.printArray();
-
     queue.enqueue(11);
-    queue.unused_indices(-1);
-    queue.printArray();
-
     queue.enqueue(12);
-    queue.unused_indices(-1);
-    queue.printArray();
-
     queue.enqueue(13);
-    queue.unused_indices(-1);
-    queue.printArray();
-
     queue.dequeue();
-    queue.unused_indices(-1);
-    queue.printArray();
-
     queue.enqueue(111);
-    queue.unused_indices(-1);
-    queue.printArray();
-
     queue.enqueue(112);
-    queue.unused_indices(-1);
-    queue.printArray();
-
     queue.dequeue();
-    queue.unused_indices(-1);
-    queue.printArray();
-
     queue.enqueue(1333);
-    queue.unused_indices(-1);
-    queue.printArray();
-
     queue.dequeue();
-    queue.unused_indices(-1);
-    queue.printArray();
-
     queue.enqueue(1334);
     queue.unused_indices(-1);
     queue.printArray();
