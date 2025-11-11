@@ -44,6 +44,7 @@ public:
         for (int i = 0; i < capacity_; i++) {
             array_[i] = other_data[i];
         }
+        return *this;
         
     }
 
@@ -51,7 +52,7 @@ public:
         capacity_ = other.getMaxCapacity();
         curr_size_ = other.getSize();
         array_ = other.getData();
-        other.resetData();
+        other.resetData(false);
     }
 
     ABS& operator=(ABS&& other) noexcept {
@@ -59,7 +60,8 @@ public:
         capacity_ = other.getMaxCapacity();
         curr_size_ = other.getSize();
         array_ = other.getData();
-        other.resetData();
+        other.resetData(false);
+        return *this;
     }
 
     ~ABS() noexcept {
@@ -86,7 +88,7 @@ public:
         if (curr_size_ >= capacity_) {
             capacity_ *= scale_factor_;
             T* temp_array = new T[capacity_];
-            for (int i = 0; i < curr_size_; i++) {
+            for (unsigned int i = 0; i < curr_size_; i++) {
                 temp_array[i] = array_[i];
             }
             delete[] array_;
