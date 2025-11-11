@@ -193,28 +193,25 @@ public:
 
     void PrintForward() {
         if (curr_size_ == 0) {return;}
-        for (int i = first_index; i < first_index + curr_size_; i++) {
+        for (int i = first_index; i < first_index + curr_size_ ; i++) {
             std::cout << array_[i % (curr_size_)] << " ";
         }
         std::cout << std::endl;
     }
 
     void PrintReverse() {
-
-        if (first_index <= last_index && curr_size_ != 0) {
-            for (int i = last_index; i >= last_index; i++) {
-                std::cout << array_[i] << " ";
-            }
-        } else {
-            for (int i = last_index; i >= 0; i--) {
-                std::cout << array_[i] << " ";
-            }
-            for (int i = curr_size_ - 1; i >= first_index; i--) {
-                std::cout << array_[i] << " ";
-            }
+        T* temp = new T[curr_size_];
+        int index = 0;
+        for (int i = first_index; i < first_index + curr_size_ ; i++) {
+            temp[index] = array_[i % (curr_size_)];
+            index++;
         }
-
+        
+        for (int i = curr_size_ - 1; i >= 0; i--) {
+            std::cout << temp[i] << " ";
+        }
         std::cout << std::endl;
+        delete[] temp;
     }
 
     void printArray() {
