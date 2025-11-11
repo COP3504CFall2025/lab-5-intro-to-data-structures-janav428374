@@ -101,10 +101,10 @@ public:
             array_ = temp_data;
         }
 
-        for (int i = curr_size_; i > 0; i--) {
-            array_[i] = array_[i - 1];
-        }
-        array_[0] = data;
+        // for (int i = curr_size_; i > 0; i--) {
+        //     array_[i] = array_[i - 1];
+        // }
+        array_[curr_size_] = data;
         curr_size_++;
     }
 
