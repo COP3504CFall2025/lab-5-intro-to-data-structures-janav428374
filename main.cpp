@@ -20,7 +20,12 @@
 */
 
 int main() {
-    ABS<int> stack(70);
+    ABS<int> stack(1);
+    stack.push(1);
+    stack.push(3);
+    std::cout << stack.getMaxCapacity() << std::endl;
+    stack.push(3);
+    std::cout << stack.getMaxCapacity() << std::endl;
 }
 
 
