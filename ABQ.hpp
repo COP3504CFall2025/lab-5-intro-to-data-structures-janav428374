@@ -70,7 +70,7 @@ public:
         array_ = other.getData();
         first_index = other.getFirstIndex();
         last_index = other.getLastIndex();
-        other.resetData(false);
+        other.array_ = nullptr;
     }
     ABQ& operator=(ABQ&& other) noexcept {
         resetData(true);
@@ -79,7 +79,7 @@ public:
         array_ = other.getData();
         first_index = other.getFirstIndex();
         last_index = other.getLastIndex();
-        other.resetData(false);
+        other.array_ = nullptr;
         return *this;
     }
     ~ABQ() noexcept {
@@ -240,5 +240,18 @@ public:
             }
         }
     }
+
+    void printE() {
+    if (array_ == nullptr) {std::cout << "No array" << std::endl; return;}
+    unused_indices(-1);
+    std::cout << "Array Printing: ";
+    printArray();
+    std::cout << "Forward Printing: ";
+    PrintForward();
+    std::cout << "Backward Printing: ";
+    PrintReverse();
+    std::cout << " " << std::endl;
+    }
+    
 
 };

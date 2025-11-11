@@ -1,4 +1,4 @@
-#ifdef MAIN
+#ifndef MAIN
 
 #include "ABDQ.hpp"
 #include "ABQ.hpp"
@@ -33,12 +33,12 @@ int main() {
     queue.enqueue(1333);
     queue.dequeue();
     queue.enqueue(1334);
-    queue.unused_indices(-1);
-    queue.printArray();
-
-    queue.PrintForward();
-    queue.PrintReverse();
+    queue.printE();
+    
+    ABQ<int> queue2(std::move(queue));
+    queue.printE();
+    queue2.printE();
+    queue2.dequeue();
+    queue2.printE();
 }
-
-
 #endif
