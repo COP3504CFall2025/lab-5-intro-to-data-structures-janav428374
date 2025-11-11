@@ -20,10 +20,8 @@
 */
 
 int main() {
-    ABS<int> stack(1);
+    ABS<int> stack(2);
     stack.push(1);
-    stack.push(3);
-    std::cout << stack.getMaxCapacity() << std::endl;
     stack.push(3);
     std::cout << stack.getMaxCapacity() << std::endl;
 }
