@@ -83,6 +83,7 @@ public:
         array_ = other.getData();
 
         other.resetData(false);
+        return *this;
     }
     ~ABQ() noexcept {
         resetData(true);
