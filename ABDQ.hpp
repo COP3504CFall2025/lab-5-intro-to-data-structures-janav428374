@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include "Interfaces.hpp"
 #include <utility>
+#include <iostream>
 
 template <typename T>
 class ABDQ : public DequeInterface<T> {
@@ -97,41 +98,26 @@ public:
     void pushFront(const T& item) override {
         if (size_ >= capacity_) {
             ensureCapacity();
-            T* temp_data = new T[capacity_];
-            
-            int index = 0;
-            for (unsigned int i = front_; i < front_ + size_; i++) {
-                temp_data[index] = data_[mod(i, capacity_ / SCALE_FACTOR)];
-            }
-            delete[] data_;
-            data_ = temp_data;
-
-            front_ = 0;
-            back_ = size_ - 1;
         } 
 
-        back_ = mod(back_ + 1, capacity_);
-        data_[back_] = item; 
+        if (size_ != 0) {
+            front_ = mod(static_cast<int>(front_ - 1), capacity_); 
+        }
+        
+        data_[front_] = item;
         size_++;
     }
 
     void pushBack(const T& item) override {
         if (size_ >= capacity_) {
             ensureCapacity();
-            T* temp_data = new T[capacity_];
-            
-            int index = 1;
-            for (unsigned int i = front_; i < front_ + size_; i++) {
-                temp_data[index] = data_[mod(i, capacity_ / SCALE_FACTOR)];
-            }
-            delete[] data_;
-            data_ = temp_data;
-            front_ = 1;
-            back_ = size_;
         } 
         
-        front_ = mod(static_cast<int>(front_ - 1), capacity_); 
-        data_[front_] = item;
+        //back_ = mod(back_ + 1, capacity_);
+        if (size_ != 0) {
+            back_ = mod(back_ + 1, capacity_);
+        }
+        data_[back_] = item; 
         size_++;
     }
 
@@ -141,7 +127,15 @@ public:
             throw std::runtime_error("Empty Queue");
         }
         T returnValue = data_[front_];
-        front_ = mod(front_ + 1, capacity_);
+
+        if (front_ != back_) {
+            front_ = mod(front_ + 1, capacity_);
+            size_--;
+        } else {
+            size_ = 0;
+            front_ = 0;
+            back_ = 0;
+        }
         ShrinkIfNeeded();
         return returnValue;
     }
@@ -150,7 +144,16 @@ public:
             throw std::runtime_error("Empty Queue");
         }
         T returnValue = data_[back_];
-        back_ = mod(back_ - 1, capacity_);
+
+        if (front_ != back_) {
+            back_ = mod(back_ - 1, capacity_);
+            size_--;
+        } else {
+            size_ = 0;
+            front_ = 0;
+            back_ = 0;
+        }
+        
         ShrinkIfNeeded();
         return returnValue;
     }
@@ -203,6 +206,19 @@ public:
 
     void ensureCapacity() {
         capacity_ *= SCALE_FACTOR;
+        T* temp_data = new T[capacity_];
+            
+        int index = 0;
+        for (unsigned int i = front_; i < front_ + size_; i++) {
+            temp_data[index] = data_[mod(i, capacity_ / SCALE_FACTOR)];
+            index++;
+        } 
+        
+        
+        delete[] data_;
+        data_ = temp_data;
+        front_ = 0;
+        back_ = size_ - 1;
     }
 
     void ShrinkIfNeeded() {
@@ -211,14 +227,65 @@ public:
             T* temp_data = new T[capacity_];
             
             int index = 0;
-            for (unsigned int i = front_; i < front_ + size_; i++) {
-                temp_data[index] = data_[mod(i, capacity_ / SCALE_FACTOR)];
+            if (front_ != back_) {
+                for (unsigned int i = front_; i < front_ + size_; i++) {
+                    temp_data[index] = data_[mod(i, capacity_ / SCALE_FACTOR)];
+                }
+            } else {
+                //std::cout << "here" << std::endl;
+                temp_data[0] = data_[front_];
             }
+
             delete[] data_;
             data_ = temp_data;
             front_ =  0;
-            back_ = size_ - 1;
+            if (size_ == 0) {
+                back_ = 0;
+            } else {
+                back_ = size_ - 1;
+            }
+            
         } 
     }
+
+    void unused_indices(T val) {
+        size_t first_index = front_;
+        size_t last_index = back_;
+        if (first_index <= last_index) {
+            for (int i = 0; i < first_index; i++) {
+                data_[i] = val;
+            }
+            for (int i = last_index + 1; i < capacity_; i++) {
+                data_[i] = val;
+            }
+        } else {
+            for (int i = last_index + 1; i < first_index; i++) {
+                data_[i] = val;
+            }
+        } 
+        
+        if (size_ == 0) {
+            for (int i = 0; i < capacity_; i++) {
+                data_[i] = val;
+            }
+        }
+    }
+
+    void printArray() {
+        for (int i = 0; i < capacity_; i++) {
+            std::cout << data_[i] << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    void PrintE(T i) {
+        std::cout << "Front: " << front_ << std::endl;
+        std::cout << "Back: " << back_ << std::endl;
+        unused_indices(i);
+        printArray();
+
+    }
+
+
 
 };
