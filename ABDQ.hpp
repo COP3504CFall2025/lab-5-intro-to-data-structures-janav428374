@@ -130,7 +130,7 @@ public:
             back_ = size_;
         } 
         
-        front_ = mod(static_cast<int>(front_ - 1), capacity_); 
+        front_ = mod(static_cast<int>(front_) - 1, capacity_); 
         data_[front_] = item;
         size_++;
     }
