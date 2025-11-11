@@ -20,17 +20,7 @@
 */
 
 int main() {
-    ABDQ<int> queue(5);
-    //queue.PrintE(-1);
-    //std::cout << queue.getSize() << std::endl;
-    
-    //queue.pushFront(00)
-    queue.pushFront(10);
-    queue.pushFront(100);
-    queue.popBack();
-    queue.popFront();
-    queue.popBack();
-    queue.PrintE(-1);
     
 }
+
 #endif

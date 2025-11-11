@@ -94,7 +94,7 @@ public:
             capacity_ *= scale_factor_;
             T* temp_data = new T[capacity_];
 
-            for (unsigned int i = 0; i < curr_size_; i++) {
+            for (unsigned int i = 0; i < curr_size_; i++) { //Increases size of array if needed
                 temp_data[i] = array_[i];
             }
             delete[] array_;
@@ -111,7 +111,7 @@ public:
             throw std::runtime_error("Queue Empty");
         }
 
-        return array_[0];
+        return array_[0]; // the front element
     }
 
     // Deletion
@@ -127,7 +127,7 @@ public:
             capacity_ /= scale_factor_;
             T* temp_data = new T[capacity_];
 
-            for (unsigned int i = 0; i < curr_size_; i++) {
+            for (unsigned int i = 0; i < curr_size_; i++) { //shifts elements left since there is an empty space
                 temp_data[i] = array_[i + 1];
             }
             delete[] array_;
@@ -156,7 +156,7 @@ public:
         std::cout << std::endl;
     }    
 
-    void resetData(bool delete_data) {
+    void resetData(bool delete_data) { //resetting data in different circumstances
         if (delete_data) {
             delete[] array_;
         }

@@ -15,11 +15,11 @@ public:
 	// Behaviors
 	void printForward() const {
 		if (count == 0) {return;}
-		printNodeF(tail);
+		printNodeF(tail); //calls a recursive funtion for printing
 	}
 	void printReverse() const {
 		if (count == 0) {return;}
-		printNodeB(head);
+		printNodeB(head); //calls a recursive funtion for printing
 	}
 
 	// Accessors
@@ -86,9 +86,10 @@ public:
 		count--;
 		return true;
 	}
+
 	void clear() {
 		if (head != nullptr) {
-			removeNode(head);
+			removeNode(head); //recursively remove all Nodes
 		}
 		count = 0;
 		head = nullptr;

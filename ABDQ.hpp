@@ -41,7 +41,7 @@ public:
         back_ = other.getBack();
         
         T* temp_data = new T[capacity_];
-        //delet data if not constructor
+        //delete data if not constructor
         data_ = temp_data;
         T* other_data = other.data();
 
@@ -49,6 +49,7 @@ public:
             data_[i] = other_data[i];
         }
     }
+
     ABDQ(ABDQ&& other) noexcept {
         capacity_ = other.getCapacity();
         size_ = other.getSize();
@@ -57,7 +58,7 @@ public:
         //delete data_ if not constructor
         data_ = other.data();
 
-        other.reset(false);
+        other.reset(false); //Reset, but don't delete data since it would be double delete
     }
 
     ABDQ& operator=(const ABDQ& other) {
@@ -87,7 +88,7 @@ public:
         delete[] data_;
         data_ = other.data();
 
-        other.reset(false);
+        other.reset(false);//Reset other, but don't delete data since it would be double delete
         return *this;
     }
     ~ABDQ() {
@@ -97,7 +98,7 @@ public:
     // Insertion
     void pushFront(const T& item) override {
         if (size_ >= capacity_) {
-            ensureCapacity();
+            ensureCapacity(); //Increase size if needed
         } 
 
         if (size_ != 0) {
@@ -113,7 +114,6 @@ public:
             ensureCapacity();
         } 
         
-        //back_ = mod(back_ + 1, capacity_);
         if (size_ != 0) {
             back_ = mod(back_ + 1, capacity_);
         }
@@ -161,7 +161,7 @@ public:
     // Access
     const T& front() const override {
         if (size_ == 0) {
-            throw std::runtime_error("Queue Empty");
+            throw std::runtime_error("Queue Empty"); 
         }
         return data_[front_];
     }
@@ -193,7 +193,7 @@ public:
         return back_;
     }
 
-    void reset(bool deleteData) {
+    void reset(bool deleteData) { //for reseting an object in various circumstances
         if (deleteData && data_ != nullptr) {
             delete[] data_;
         }
@@ -204,13 +204,13 @@ public:
         back_ = 0;
     }
 
-    int mod(int num, int mod) {
+    int mod(int num, int mod) { //Implemented this function so there is no negative remainder
         int result = num % mod;
         if (result < 0) {result += mod;}
         return result;
     }
 
-    void ensureCapacity() {
+    void ensureCapacity() { //Increases size of array and arranges elements in order
         capacity_ *= SCALE_FACTOR;
         T* temp_data = new T[capacity_];
             
@@ -227,7 +227,7 @@ public:
         back_ = size_ - 1;
     }
 
-    void ShrinkIfNeeded() {
+    void ShrinkIfNeeded() { //Decreases size of array if underutilized and arranged elements in order
         if (size_ < capacity_ / SCALE_FACTOR) {
             capacity_ /= SCALE_FACTOR;
             T* temp_data = new T[capacity_];
@@ -238,8 +238,7 @@ public:
                     temp_data[index] = data_[mod(i, capacity_ / SCALE_FACTOR)];
                 }
             } else {
-                //std::cout << "here" << std::endl;
-                temp_data[0] = data_[front_];
+                temp_data[0] = data_[front_]; //hadnling case if there is only 1 element
             }
 
             delete[] data_;
@@ -254,6 +253,7 @@ public:
         } 
     }
 
+    //Functions for printing and testing purposes
     void unused_indices(T val) {
         size_t first_index = front_;
         size_t last_index = back_;
