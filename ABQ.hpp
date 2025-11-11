@@ -70,7 +70,7 @@ public:
         last_index = other.getLastIndex();
         other.resetData(false);
     }
-    ABQ& operator=(ABQ&& rhs) noexcept {
+    ABQ& operator=(ABQ&& other) noexcept {
         resetData(true);
         capacity_ = other.getMaxCapacity();
         curr_size_ = other.getSize();
@@ -121,7 +121,7 @@ public:
             capacity_ *= scale_factor_;
             T* temp_data = new T[capacity_];
 
-            for (int i = first_index; i < curr_size_ + first_index; i++) { //Copies data in order in the new array
+            for (unsigned int i = first_index; i < curr_size_ + first_index; i++) { //Copies data in order in the new array
                 temp_data[i - first_index] = array_[i % curr_size_];
             }
 
@@ -158,7 +158,7 @@ public:
             capacity_ /= scale_factor_;
             T* temp_data = new T[capacity_];
 
-            for (int i = first_index; i < curr_size_ + first_index; i++) { //Copies data in order in the new array
+            for (unsigned int i = first_index; i < curr_size_ + first_index; i++) { //Copies data in order in the new array
                 temp_data[i - first_index] = array_[i % (curr_size_ + first_index)];
             }
 
