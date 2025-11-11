@@ -160,9 +160,15 @@ public:
 
     // Access
     const T& front() const override {
+        if (size_ == 0) {
+            throw std::runtime_error("Queue Empty");
+        }
         return data_[front_];
     }
     const T& back() const override {
+        if (size_ == 0) {
+            throw std::runtime_error("Queue Empty");
+        }
         return data_[back_];
     }
 
