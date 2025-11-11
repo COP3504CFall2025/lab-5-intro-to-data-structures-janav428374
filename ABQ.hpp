@@ -71,6 +71,7 @@ public:
         first_index = other.getFirstIndex();
         last_index = other.getLastIndex();
         other.array_ = nullptr;
+        //other.resetData(false);
     }
     ABQ& operator=(ABQ&& other) noexcept {
         resetData(true);
@@ -80,6 +81,7 @@ public:
         first_index = other.getFirstIndex();
         last_index = other.getLastIndex();
         other.array_ = nullptr;
+        //other.resetData(false);
         return *this;
     }
     ~ABQ() noexcept {
