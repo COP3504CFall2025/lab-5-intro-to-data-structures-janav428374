@@ -12,7 +12,7 @@ class ABS : public StackInterface<T> {
 public:
     // Big 5 + Parameterized Constructor
     ABS() {
-        capacity_ = 1;
+        capacity_ = 0;
         curr_size_ = 0;
         array_ = new T[capacity_];
     }
@@ -87,6 +87,7 @@ public:
     void push(const T& data) override {
         if (curr_size_ == capacity_) {
             capacity_ *= scale_factor_;
+            if (capacity_ == 0) {capacity_++;}
             T* temp_array = new T[capacity_];
             for (unsigned int i = 0; i < curr_size_; i++) {
                 temp_array[i] = array_[i];
