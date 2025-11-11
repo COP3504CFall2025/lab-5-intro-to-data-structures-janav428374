@@ -162,19 +162,19 @@ public:
         //std::cout << first_index << std::endl;
         curr_size_ --;
 
-        if (curr_size_ < capacity_ / scale_factor_) {
-            capacity_ /= scale_factor_;
-            T* temp_data = new T[capacity_];
+        // if (curr_size_ < capacity_ / scale_factor_) {
+        //     capacity_ /= scale_factor_;
+        //     T* temp_data = new T[capacity_];
 
-            for (unsigned int i = first_index; i < curr_size_ + first_index; i++) { //Copies data in order in the new array
-                temp_data[i - first_index] = array_[i % (curr_size_ + first_index)];
-            }
+        //     for (unsigned int i = first_index; i < curr_size_ + first_index; i++) { //Copies data in order in the new array
+        //         temp_data[i - first_index] = array_[i % (curr_size_ + first_index)];
+        //     }
 
-            delete[] array_;
-            array_ = temp_data;
-            first_index = 0;
-            last_index = curr_size_ - 1;
-        }
+        //     delete[] array_;
+        //     array_ = temp_data;
+        //     first_index = 0;
+        //     last_index = curr_size_ - 1;
+        // }
         return element;
     }
 
