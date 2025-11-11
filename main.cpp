@@ -1,4 +1,4 @@
-#ifndef MAIN
+#ifdef MAIN
 
 #include "ABDQ.hpp"
 #include "ABQ.hpp"
