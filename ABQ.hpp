@@ -82,7 +82,7 @@ public:
         last_index = other.getLastIndex();
         array_ = other.getData();
 
-        ther.resetData(false);
+        other.resetData(false);
     }
     ~ABQ() noexcept {
         resetData(true);
