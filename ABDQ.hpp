@@ -19,7 +19,7 @@ private:
 public:
     // Big 5
     ABDQ() {
-        capacity_ = 0;
+        capacity_ = 1;
         size_ = 0;
         front_ = 0;
         back_ = 0;
