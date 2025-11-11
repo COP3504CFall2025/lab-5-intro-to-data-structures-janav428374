@@ -1,4 +1,4 @@
-#ifdef MAIN
+#ifndef MAIN
 
 #include "ABDQ.hpp"
 #include "ABQ.hpp"
@@ -20,15 +20,7 @@
 */
 
 int main() {
-    LLS<int> stack;
-    stack.push(5);
-    stack.push(5);
-    stack.push(5);
-    LLS<int> stack2 = std::move(stack);
-    stack2.PrintForward();
-    std::cout << "Original Stack" << std::endl;
-    stack.PrintForward();
-    return 0;
+    ABS<int> stack(70);
 }
 
 
