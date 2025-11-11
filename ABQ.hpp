@@ -94,10 +94,10 @@ public:
     [[nodiscard]] T* getData() const noexcept {
         return array_;
     }
-    [[nodiscard]] getFirstIndex() const noexcept {
+    [[nodiscard]] size_t getFirstIndex() const noexcept {
         return first_index;
     }
-    [[nodiscard]] getLastIndex() const noexcept {
+    [[nodiscard]] size_t getLastIndex() const noexcept {
         return last_index;
     }
 
