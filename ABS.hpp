@@ -116,14 +116,14 @@ public:
         T element = array_[curr_size_];
         if (curr_size_ < capacity_ / scale_factor_) {
             capacity_ /= scale_factor_;
-        }
-        T* temp_data = new T[capacity_];
+            T* temp_data = new T[capacity_];
 
-        for (int i = 0; i < curr_size_; i++) {
-            temp_data[i] = array_[i];
+            for (int i = 0; i < curr_size_; i++) {
+                temp_data[i] = array_[i];
+            }
+            delete[] array_;
+            array_ = temp_data;
         }
-        delete[] array_;
-        array_ = temp_data;
         
         return element;
     }

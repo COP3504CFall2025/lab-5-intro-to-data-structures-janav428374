@@ -15,8 +15,6 @@ public: //remove this later
     size_t curr_size_;
     T* array_;
     static constexpr size_t scale_factor_ = 2;
-    size_t first_index;
-    size_t last_index;
 
 public:
     // Constructors + Big 5
@@ -24,53 +22,56 @@ public:
         capacity_ = 1;
         curr_size_ = 0;
         array_ = new T[capacity_];
-
-        first_index = 0;
-        last_index = 0;
     }
+
     explicit ABQ(const size_t capacity) {
         capacity_ = capacity;
         curr_size_ = 0;
         array_ = new T[capacity_];
-
-        first_index = 0;
-        last_index = 0;
     }
+
     ABQ(const ABQ& other) {
         capacity_ = other.getMaxCapacity();
         curr_size_ = other.getSize();
-        first_index = other.getFirstIndex();
-        last_index = other.getLastIndex();
         array_ = new T[capacity_];
 
-        T* other_array = other.getData();
+        T* other_data = other.getData();
+
         for (int i = 0; i < curr_size_; i++) {
-            array_[i] = other_array[i];
+            array_[i] = other_data[i];
         }
     }
+
     ABQ& operator=(const ABQ& other) {
+        if (this == *other) {return *this;}
+
+        T* temp_data = new T[other.getMaxCapacity()];
+        delete[] array_;
+
         capacity_ = other.getMaxCapacity();
         curr_size_ = other.getSize();
-        first_index = other.getFirstIndex();
-        last_index = other.getLastIndex();
-        T* temp_array = new T[capacity_];
-
+        array_ = temp_data;
         T* other_data = other.getData();
         for (int i = 0; i < curr_size_; i++) {
-            temp_array[i] = other_data[i];
+            array_[i] = other_data[i];
         }
-
-        delete[] array_;
-        array_ = temp_array;
-        return *this;
     }
     
-    // ABQ(ABQ&& other) noexcept {
-        
-    // }
-    // ABQ& operator=(ABQ&& other) noexcept {
-        
-    // }
+    ABQ(ABQ&& other) noexcept {
+        capacity_ = other.getMaxCapacity();
+        curr_size_ = other.getSize();
+        array_ = other.getData();
+        other.resetData(false);
+    }
+
+    ABQ& operator=(ABQ&& other) noexcept {
+        resetData(true);
+        capacity_ = other.getMaxCapacity();
+        curr_size_ = other.getSize();
+        array_ = other.getData();
+        other.resetData(false);
+        return *this;
+    }
 
     ~ABQ() noexcept {
         resetData(true);
@@ -86,49 +87,24 @@ public:
     [[nodiscard]] T* getData() const noexcept {
         return array_;
     }
-    [[nodiscard]] size_t getFirstIndex() const noexcept {
-        return first_index;
-    }
-    [[nodiscard]] size_t getLastIndex() const noexcept {
-        return last_index;
-    }
 
     // Insertion
     void enqueue(const T& data) override {
-        if (first_index == 0 && last_index < capacity_ - 1) {
-            if (curr_size_ == 0) {
-                array_[last_index] = data;
-            } else {
-                array_[last_index + 1] = data;
-                last_index++;
-            }
-            curr_size_++;
-            return;
-        } else if (first_index != 0 && curr_size_ < capacity_) {
-            last_index = (last_index + 1) % capacity_;
-            array_[last_index] = data; //wraps back up if the indices overflow
-            curr_size_ ++;
-            return;
-        } else if (curr_size_ >= capacity_) {
+        if (curr_size_ >= capacity_) {
             capacity_ *= scale_factor_;
-            if (capacity_ == 0) {capacity_ ++;}
             T* temp_data = new T[capacity_];
 
-            for (unsigned int i = first_index; i < curr_size_ + first_index; i++) { //Copies data in order in the new array
-                temp_data[i - first_index] = array_[i % curr_size_];
+            for (int i = 0; i < curr_size_; i++) {
+                temp_data[i] = array_[i];
             }
-
             delete[] array_;
             array_ = temp_data;
-
-            first_index = 0;
-            last_index = curr_size_ - 1;
-            array_[last_index + 1] = data;
-            last_index++;
-            curr_size_++;
         }
 
-        //curr_size_++;
+        for (int i = curr_size_; i > 0; i--) {
+            array_[i] = array_[i - 1];
+        }
+        array_[0] = data;
     }
 
     // Access
@@ -136,8 +112,8 @@ public:
         if (curr_size_ == 0) {
             throw std::runtime_error("Queue Empty");
         }
-        T element = array_[first_index];
-        return element;
+
+        return array_[0];
     }
 
     // Deletion
@@ -145,27 +121,42 @@ public:
         if (curr_size_ == 0) {
             throw std::runtime_error("Queue Empty");
         }
-        T element = array_[first_index];
-        first_index = (first_index + 1) % capacity_;
-        //std::cout << first_index << std::endl;
+
+        T front_element = array_[0];
         curr_size_ --;
 
         if (curr_size_ < capacity_ / scale_factor_) {
             capacity_ /= scale_factor_;
             T* temp_data = new T[capacity_];
 
-            for (unsigned int i = first_index; i < curr_size_ + first_index; i++) { //Copies data in order in the new array
-                temp_data[i - first_index] = array_[i % (curr_size_ + first_index)];
+            for (int i = 0; i < curr_size_; i++) {
+                temp_data[i] = array_[i + 1];
             }
-
             delete[] array_;
             array_ = temp_data;
-            first_index = 0;
-            last_index = curr_size_ - 1;
+        } else {
+            for (int i = 0; i < curr_size_; i++) {
+                array_[i] = array_[i + 1];
+            }
         }
-
-        return element;
+        
+        return front_element;
     }
+
+
+    void PrintForward() {
+        for (int i = 0; i < curr_size_; i++) {
+            std::cout << array_[i] << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    void PrintReverse() {
+        for (int i = curr_size_ - 1; i >= 0; i--) {
+            std::cout << array_[i] << " ";
+        }
+        std::cout << std::endl;
+    }    
 
     void resetData(bool delete_data) {
         if (delete_data) {
@@ -174,72 +165,6 @@ public:
         array_ = nullptr;
         capacity_ = 0;
         curr_size_ = 0;
-        first_index = 0;
-        last_index = 0;
     }
-
-    void PrintForward() {
-        if (curr_size_ == 0) {return;}
-        for (int i = first_index; i < first_index + curr_size_ ; i++) {
-            std::cout << array_[i % (curr_size_)] << " ";
-        }
-        std::cout << std::endl;
-    }
-
-    void PrintReverse() {
-        T* temp = new T[curr_size_];
-        int index = 0;
-        for (int i = first_index; i < first_index + curr_size_ ; i++) {
-            temp[index] = array_[i % (curr_size_)];
-            index++;
-        }
-        
-        for (int i = curr_size_ - 1; i >= 0; i--) {
-            std::cout << temp[i] << " ";
-        }
-        std::cout << std::endl;
-        delete[] temp;
-    }
-
-    void printArray() {
-        for (int i = 0; i < capacity_; i++) {
-            std::cout << array_[i] << " ";
-        }
-        std::cout << std::endl;
-    }
-
-    void unused_indices(T val) {
-        if (first_index <= last_index) {
-            for (int i = 0; i < first_index; i++) {
-                array_[i] = val;
-            }
-            for (int i = last_index + 1; i < capacity_; i++) {
-                array_[i] = val;
-            }
-        } else {
-            for (int i = last_index + 1; i < first_index; i++) {
-                array_[i] = val;
-            }
-        } 
-        
-        if (curr_size_ == 0) {
-            for (int i = 0; i < capacity_; i++) {
-                array_[i] = val;
-            }
-        }
-    }
-
-    void printE() {
-    if (array_ == nullptr) {std::cout << "No array" << std::endl; return;}
-    unused_indices(-1);
-    std::cout << "Array Printing: ";
-    printArray();
-    std::cout << "Forward Printing: ";
-    PrintForward();
-    std::cout << "Backward Printing: ";
-    PrintReverse();
-    std::cout << " " << std::endl;
-    }
-    
 
 };
