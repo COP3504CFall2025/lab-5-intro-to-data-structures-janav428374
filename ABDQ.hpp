@@ -44,7 +44,7 @@ public:
         data_ = temp_data;
         T* other_data = other.data();
 
-        for (int i = 0; i < size_; i++) {
+        for (unsigned int i = 0; i < size_; i++) {
             data_[i] = other_data[i];
         }
     }
@@ -71,7 +71,7 @@ public:
         data_ = temp_data;
         T* other_data = other.data();
 
-        for (int i = 0; i < size_; i++) {
+        for (unsigned int i = 0; i < size_; i++) {
             data_[i] = other_data[i];
         }
         return *this;
@@ -100,7 +100,7 @@ public:
             T* temp_data = new T[capacity_];
             
             int index = 0;
-            for (int i = front_; i < front_ + size_; i++) {
+            for (unsigned int i = front_; i < front_ + size_; i++) {
                 temp_data[index] = data_[mod(i, capacity_ / SCALE_FACTOR)];
             }
             delete[] data_;
@@ -121,7 +121,7 @@ public:
             T* temp_data = new T[capacity_];
             
             int index = 1;
-            for (int i = front_; i < front_ + size_; i++) {
+            for (unsigned int i = front_; i < front_ + size_; i++) {
                 temp_data[index] = data_[mod(i, capacity_ / SCALE_FACTOR)];
             }
             delete[] data_;
@@ -176,11 +176,11 @@ public:
         return capacity_;
     }
 
-    std::size_t getFront() {
+    std::size_t getFront() const noexcept{
         return front_;
     }
 
-    std::size_t getBack() {
+    std::size_t getBack() const noexcept{
         return back_;
     }
 
@@ -188,7 +188,7 @@ public:
         if (deleteData && data_ != nullptr) {
             delete[] data_;
         }
-        data = nullptr;
+        data_ = nullptr;
         capacity_ = 0;
         size_ = 0;
         front_ = 0;
@@ -211,7 +211,7 @@ public:
             T* temp_data = new T[capacity_];
             
             int index = 0;
-            for (int i = front_; i < front_ + size_; i++) {
+            for (unsigned int i = front_; i < front_ + size_; i++) {
                 temp_data[index] = data_[mod(i, capacity_ / SCALE_FACTOR)];
             }
             delete[] data_;
